@@ -1,7 +1,12 @@
 class Solution {
 public:
     int minBitFlips(int start, int goal) {
-        return __builtin_popcount(start^goal);
+        int x=start^goal;
+        int count=0;
+        while(x!=0){
+            count+=x&1; //last bit
+            x>>=1;//remove last bits
+        }
+        return count;
     }
 };
-// This is a C++ built-in function that counts how many 1s are in a number's binary representation.

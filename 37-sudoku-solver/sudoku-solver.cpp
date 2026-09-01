@@ -1,47 +1,47 @@
 class Solution {
 public:
-    bool isvalid(vector<vector<char>>&board,int row,int col,int num){
-        for(int c=0;c<9;c++){
-            if(board[row][c]==num){
-                return false;
-            }
-        }
-        for(int r=0;r<9;r++){
-            if(board[r][col]==num){
-                return false;
-            }
-        }
-        int startrow=(row/3)*3;
-        int startcol=(col/3)*3;
-        for(int i=startrow;i<startrow+3;i++){
-            for(int j=startcol;j<startcol+3;j++){
-                if(board[i][j]==num){
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-    bool solve(vector<vector<char>>&board){
+    bool solve(vector<vector<char>>&board,vector<vector<int>>&row,vector<vector<int>>&col,vector<vector<int>>&box){
         for(int i=0;i<9;i++){
             for(int j=0;j<9;j++){
-                if(board[i][j]=='.'){
-                    for(char num='1';num<='9';num++){
-                        if(isvalid(board,i,j,num)){
-                            board[i][j]=num;
-                            if(solve(board)){
-                                return true;
-                            }
-                            board[i][j]='.';
-                        }
-                    }
-                    return false;
+                if(board[i][j]!='.'){
+                    continue;
                 }
+                int b=(i/3)*3+j/3;
+                for(int num=1;num<=9;num++){
+                if(row[i][num]||col[j][num]||box[b][num])
+                continue;
+                    board[i][j]=num+'0';
+                    row[i][num]=1;
+                    col[j][num]=1;
+                    box[b][num]=1;
+                    if(solve(board,row,col,box)){
+                        return true;
+                    }
+                    board[i][j]='.';
+                    row[i][num]=0;
+                    col[j][num]=0;
+                    box[b][num]=0;
+                }
+                return false;
             }
         }
         return true;
     }
     void solveSudoku(vector<vector<char>>& board) {
-        solve(board);
+        vector<vector<int>>row(9,vector<int>(10));
+        vector<vector<int>>col(9,vector<int>(10));
+        vector<vector<int>>box(9,vector<int>(10));
+        for(int r=0;r<9;r++){
+            for(int c=0;c<9;c++){
+                if(board[r][c]!='.'){
+                    int num=board[r][c]-'0';
+                    int b=(r/3)*3+c/3;
+                    row[r][num]=1;
+                    col[c][num]=1;
+                    box[b][num]=1;
+                }
+            }
+        }
+        solve(board,row,col,box);
     }
 };

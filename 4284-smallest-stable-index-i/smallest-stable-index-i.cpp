@@ -1,16 +1,16 @@
 class Solution {
 public:
     int firstStableIndex(vector<int>& nums, int k) {
-        for(int i=0;i<nums.size();i++){
-            vector<int>mini;
-            vector<int>maxi;
-            for(int j=0;j<=i;j++){
-            maxi.push_back(nums[j]);
-            }
-            for(int j=i;j<nums.size();j++){
-                mini.push_back(nums[j]);
-            }
-            int diff=*max_element(maxi.begin(),maxi.end())-*min_element(mini.begin(),mini.end());
+        int n=nums.size();
+        vector<int>suffix(n);
+        suffix[n-1]=nums[n-1];
+        for(int i=n-2;i>=0;i--){
+            suffix[i]=min(nums[i],suffix[i+1]);
+        }
+        int prefixmax=nums[0];
+        for(int i=0;i<n;i++){
+            prefixmax=max(prefixmax,nums[i]);
+            int diff=prefixmax-suffix[i];
             if(diff<=k){
                 return i;
             }

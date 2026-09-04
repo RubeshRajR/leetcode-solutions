@@ -1,25 +1,22 @@
 class Solution {
 public:
     int oddCells(int m, int n, vector<vector<int>>& indices) {
-        vector<vector<int>>mat(m,vector<int>(n,0));
+        vector<bool>row(m,false);
+        vector<bool>col(n,false);
         for(auto &index:indices){
             int r=index[0];
             int c=index[1];
-            for(int i=0;i<n;i++){
-                mat[r][i]+=1;
-            }
-            for(int i=0;i<m;i++){
-                mat[i][c]+=1;
-            }
+            row[r]=!row[r];
+            col[c]=!col[c];
         }
         int ans=0;
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
-                if(mat[i][j]%2!=0){
+                if(row[i]!=col[j]){
                     ans++;
                 }
             }
-        }
+    }
         return ans;
     }
 };

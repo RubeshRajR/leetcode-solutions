@@ -1,15 +1,20 @@
 class Solution {
 public:
     void rotate(vector<int>& nums, int k) {
-        int n=nums.size();
-        k=k%n;
-        vector<int>ans;
-        for(int i=n-k;i<n;i++){
-            ans.push_back(nums[i]);
-        }
-        for(int i=0;i<n-k;i++){
-            ans.push_back(nums[i]);
-        }
-        nums=ans;
+        k=k%nums.size();
+        reverse(nums.begin(),nums.end());
+        reverse(nums.begin(),nums.begin()+k);
+        reverse(nums.begin()+k,nums.end());
     }
 };
+
+// [1,2,3,4,5,6,7], k = 3
+
+// Reverse all:
+// [7,6,5,4,3,2,1]
+
+// Reverse first 3:
+// [5,6,7,4,3,2,1]
+
+// Reverse remaining:
+// [5,6,7,1,2,3,4]

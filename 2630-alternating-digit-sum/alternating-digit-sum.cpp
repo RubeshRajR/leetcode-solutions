@@ -1,21 +1,15 @@
 class Solution {
 public:
     int alternateDigitSum(int n) {
-        int temp=n;
-        string s=to_string(temp);
-        int size=s.size();
-        size--;
+        string s=to_string(n);
         int sum=0;
-        while(n>0){
-            int digit=n%10;
-            if(size%2==0){
-                sum+=digit;
+        for(int i=0;i<s.size();i++){
+            if(i%2==0){
+                sum+=(s[i]-'0');
             }
             else{
-                sum+=(digit*-1);
+                sum+=(s[i]-'0')*-1;
             }
-            n/=10;
-            size--;
         }
         return sum;
     }

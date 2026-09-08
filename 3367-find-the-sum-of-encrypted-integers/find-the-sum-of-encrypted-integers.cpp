@@ -4,14 +4,12 @@ public:
         vector<int>ans;
         int sum=0;
         for(int i=0;i<nums.size();i++){
-            int maxi=INT_MIN;
+            int maxi=0;
             int x=nums[i];
             int count=0;
             while(x>0){
                 int digit=x%10;
-                if(digit>maxi){
-                    maxi=digit;
-                }
+                maxi=max(maxi,digit);
                 count++;
                 x=x/10;
             }

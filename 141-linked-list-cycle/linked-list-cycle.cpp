@@ -9,19 +9,15 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        unordered_set<ListNode*>visited;
-        ListNode*temp=head;
-        while(temp!=NULL){
-            if(visited.count(temp)){
+        ListNode*slow=head;
+        ListNode*fast=head;
+        while(fast!=NULL&&fast->next!=NULL){
+            fast=fast->next->next;
+            slow=slow->next;
+            if(slow==fast){
                 return true;
             }
-            visited.insert(temp);
-            temp=temp->next;
         }
         return false;
     }
 };
-
-// We care about:
-
-// Is this EXACT node being visited again?

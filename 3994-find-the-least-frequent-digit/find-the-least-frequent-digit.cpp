@@ -1,25 +1,15 @@
 class Solution {
 public:
     int getLeastFrequentDigit(int n) {
-        unordered_map<int,int>mp;
+        int freq[10]={};
         while(n>0){
-            int digit=n%10;
-            mp[digit]++;
-            n=n/10;
+            freq[n%10]++;
+            n/=10;
         }
-        int ans=-1;
-        int mini=INT_MAX;
-        // for(auto &p:mp){
-        //     if(p.second<mini||(p.second==mini&&p.first<ans)){
-        //         ans=p.first;
-        //         mini=p.second;
-        //     }
-        // }
-        // return ans;
-         for (auto &[digit, freq] : mp) {
-            if (freq < mini || (freq == mini && digit < ans)) {
-                mini = freq;
-                ans = digit;
+        int ans=0;
+        for(int i=1;i<=9;i++){
+            if(freq[i]!=0&&(freq[ans]==0||freq[i]<freq[ans])){
+                ans=i;
             }
         }
         return ans;

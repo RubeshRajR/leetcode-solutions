@@ -19,16 +19,25 @@ public:
         if(arr.empty())
             return NULL;
 
-        ListNode* head = new ListNode(arr[0]);
-        ListNode* tail = head;
+        // ListNode* head = new ListNode(arr[0]);
+        // ListNode* tail = head;
 
-        for(int i = 1; i < arr.size(); i++) {
+        // for(int i = 1; i < arr.size(); i++) {
 
-            tail->next = new ListNode(arr[i]);
+        //     tail->next = new ListNode(arr[i]);
 
+        //     tail = tail->next;
+        // }
+
+        // return head;
+          ListNode* dummy = new ListNode(0);
+        ListNode* tail = dummy;
+
+        for(int x : arr) {
+            tail->next = new ListNode(x);
             tail = tail->next;
         }
 
-        return head;
+        return dummy->next;
     }
 };

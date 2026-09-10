@@ -9,12 +9,11 @@ public:
         for(auto w:words2){
             mp2[w]++;
         }
-        int count=0;
-        for(auto s:words1){
-            if(mp1[s]==1&&mp2[s]==1){
-                count++;
-            }
+        int ans=0;
+         for (auto &[word, freq] : mp1) {
+            if (freq == 1 && mp2[word] == 1)
+                ans++;
         }
-        return count;
+        return ans;
     }
 };

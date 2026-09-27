@@ -1,28 +1,22 @@
 class Solution {
 public:
     int dominantIndex(vector<int>& nums) {
-        int maxi=*max_element(nums.begin(),nums.end());
-        int k=0;
+        int largest=-1;
+        int secondlargest=-1;
+        int index=0;
         for(int i=0;i<nums.size();i++){
-            if(maxi==nums[i]){
-                k=i;
-                break;
+            if(nums[i]>largest){
+                secondlargest=largest;
+                largest=nums[i];
+                index=i;
+            }
+            else if(nums[i]>secondlargest){
+                secondlargest=nums[i];
             }
         }
-        int flag=0;
-        for(int i=0;i<nums.size();i++){
-            if(k!=i){
-                if(maxi<(2*nums[i])){
-                    flag=1;
-                    break;
-                }
-            }
+        if(largest>=2*secondlargest){
+            return index;
         }
-        if(flag==0){
-            return k;
-        }
-        else{
-            return -1;
-        }
+        return -1;
     }
 };

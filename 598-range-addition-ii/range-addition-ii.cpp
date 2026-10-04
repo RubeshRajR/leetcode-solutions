@@ -13,3 +13,11 @@ public:
         return minx*miny;
     }
 };
+
+// Each operation increments a top-left x × y rectangle. The cells with the maximum value are the cells common to all operations, so their dimensions are the minimum x and minimum y among all operations. Therefore, answer = minX × minY. If there are no operations, all m × n cells remain maximum.
+
+// Time:  O(k)   → k = number of operations
+// Space: O(1)
+
+// Key idea to remember:
+// 👉 Maximum value = cells affected by EVERY operation → take minimum row × minimum column.

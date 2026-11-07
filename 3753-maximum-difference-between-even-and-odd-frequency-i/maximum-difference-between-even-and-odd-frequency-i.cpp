@@ -1,18 +1,21 @@
 class Solution {
 public:
     int maxDifference(string s) {
-        unordered_map<char,int>mp;
+        int freq[26]={0};
         for(char ch:s){
-            mp[ch]++;
+            freq[ch-'a']++;
         }
         int maxodd=INT_MIN;
         int mineven=INT_MAX;
-        for(auto p:mp){
-            if(p.second%2!=0){
-                maxodd=max(maxodd,p.second);
+        for(int p:freq){
+            if(p>0){
+
+            if(p%2!=0){
+                maxodd=max(maxodd,p);
             }
             else{
-                mineven=min(mineven,p.second);
+                mineven=min(mineven,p);
+            }
             }
         }
         return maxodd-mineven;
